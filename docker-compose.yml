@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  db:
+    container_name: techin-postgres
+    ports:
+      - 54322:5432
+    environment:
+      - POSTGRES_USER=techin-z
+      - POSTGRES_PASSWORD=12345zaza
+    image: postgres:14.4
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: techin-pgadmin
+    ports:
+      - 4433:443
+      - 8080:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=techin-z@rmutp.ac.th
+      - PGADMIN_DEFAULT_PASSWORD=12345zaza
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+  
+  strapi:
+    container_name: techin-myapp
+    ports:
+      - 1337:1337
+    environment:
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=172.22.80.1
+      - DATABASE_PORT=54322
+      - DATABASE_NAME=techin-z
+      - DATABASE_USERNAME=techin-z
+      - DATABASE_PASSWORD=12345zaza
+      - DATABASE_SSL=false
+    image: naskio/strapi:latest
+    restart: unless-stopped

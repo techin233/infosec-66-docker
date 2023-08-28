@@ -6,7 +6,7 @@ services:
     ports:
       - 54322:5432
     environment:
-      - POSTGRES_USER=techin-z
+      - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=12345zaza
     image: postgres:14.4
     restart: unless-stopped
